@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using PlacesApp.Controls;
+using PlacesApp.Models;
 using Xamarin.Forms;
 
 namespace PlacesApp.Views
@@ -9,12 +10,9 @@ namespace PlacesApp.Views
     {
         public PlacesPage()
         {
+            NavigationPage.SetHasBackButton(this, false);
             InitializeComponent();
         }
 
-        void TapGestureRecognizer_Tapped(System.Object sender, System.EventArgs e)
-        {
-            barSelector.TranslateTo(((Label)sender).X + 15, 0, 300, Easing.SinOut);
-        }
     }
 }
