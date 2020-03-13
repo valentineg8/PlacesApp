@@ -34,14 +34,14 @@ namespace PlacesApp.Components
             if ((ListLayoutOptions)newValue == ListLayoutOptions.Big)
             {
                 var newBounds = new Rectangle(elemnt.container.Bounds.X, elemnt.container.Bounds.Y, elemnt.container.Bounds.Width, 200);
-                elemnt.imgContainer.LayoutTo(newBounds, 100, Easing.Linear);
+                elemnt.imgContainer.LayoutTo(newBounds, 200, Easing.SinIn);
+                elemnt.textContainer.LayoutTo(new Rectangle(0, 200, elemnt.container.Bounds.Width, 80), 200, Easing.SinIn);
                 var parentAnimation = new Animation
                 {
-                    { 0, 1, new Animation(v => elemnt.HeightRequest = v, elemnt.HeightRequest, 300, Easing.Linear) }
+                    { 0, 1, new Animation(v => elemnt.HeightRequest = v, elemnt.HeightRequest, 300, Easing.SinIn) }
                 };
-                parentAnimation.Commit(elemnt, "parentAnimationUp", 60, 100, null, (e, z) => {
-                    elemnt.container.LayoutTo(newBounds, 200, Easing.Linear);
-                    elemnt.textContainer.LayoutTo(new Rectangle(0, 200, elemnt.container.Bounds.Width, 80), 200, Easing.Linear);
+                parentAnimation.Commit(elemnt, "parentAnimationUp", 60, 300, null, (e, z) => {
+                    elemnt.container.LayoutTo(newBounds, 200, Easing.SinIn);
 
                 });
             }
@@ -49,14 +49,14 @@ namespace PlacesApp.Components
             {
                 var parentAnimation = new Animation
                 {
-                    { 0, 1, new Animation(v => elemnt.HeightRequest = v, elemnt.HeightRequest, 100, Easing.Linear) }
+                    { 0, 1, new Animation(v => elemnt.HeightRequest = v, elemnt.HeightRequest, 100, Easing.SinIn) }
                 };
                 var newBoundImage = new Rectangle(elemnt.container.Bounds.X, elemnt.container.Bounds.Y, 100, 100);
-                elemnt.imgContainer.LayoutTo(newBoundImage, 200, Easing.Linear);
+                elemnt.imgContainer.LayoutTo(newBoundImage, 200, Easing.SinIn);
                 parentAnimation.Commit(elemnt, "parentAnimationDown", 16, 100, null, (e, z) => {
                     var newBounds = new Rectangle(elemnt.container.Bounds.X, elemnt.container.Bounds.Y, elemnt.container.Bounds.Width, 100);
-                    elemnt.container.LayoutTo(newBounds, 100, Easing.Linear);
-                    elemnt.textContainer.LayoutTo(new Rectangle(110, 0, elemnt.container.Bounds.Width - 120, 80), 100, Easing.Linear);
+                    elemnt.textContainer.LayoutTo(new Rectangle(110, 0, elemnt.container.Bounds.Width - 120, 80), 200, Easing.SinIn);
+                    elemnt.container.LayoutTo(newBounds, 100, Easing.SinIn);
                 });
             }
         }

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using PlacesApp.Controls;
 using PlacesApp.Models;
 using Xamarin.Forms;
+using Xamarin.Forms.PlatformConfiguration;
+using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 
 namespace PlacesApp.Views
 {
@@ -10,8 +12,16 @@ namespace PlacesApp.Views
     {
         public PlacesPage()
         {
-            NavigationPage.SetHasBackButton(this, false);
+            Xamarin.Forms.NavigationPage.SetHasBackButton(this, false);
             InitializeComponent();
+            
+        }
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            var safeInsets = On<iOS>().SafeAreaInsets();
+            safeInsets.Bottom = 0;
+            Padding = safeInsets;
         }
 
     }

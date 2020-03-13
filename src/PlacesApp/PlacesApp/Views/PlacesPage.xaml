@@ -10,8 +10,6 @@
              xmlns:fontawesome="clr-namespace:FontAwesome"
              xmlns:models="clr-namespace:PlacesApp.Models"
              x:Name="MainPage"
-             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
-             ios:Page.UseSafeArea="true"
              BackgroundColor="{DynamicResource mainBackground}"
              x:Class="PlacesApp.Views.PlacesPage">
     
@@ -110,6 +108,7 @@
             <StackLayout>
                 <CarouselView ItemsSource="{Binding TabItems}"
                               CurrentItem="{Binding Item}"
+                              VerticalScrollBarVisibility="Never"
                               HorizontalScrollBarVisibility="Never">
                     <CarouselView.ItemTemplate>
                     <DataTemplate>
