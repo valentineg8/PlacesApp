@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+                    x:Class="PlacesApp.Styles.Global">
+    <Color x:Key="primaryColor">#3596fc</Color>
+    <OnPlatform x:TypeArguments="x:String" 
+                x:Key="FontAwesomeBrands">
+        <On Platform="Android" 
+            Value="FontAwesome5Brands.otf#Regular" />
+        <On Platform="iOS" 
+            Value="FontAwesome5Brands-Regular" />
+    </OnPlatform> 
+    
+    <OnPlatform x:TypeArguments="x:String" 
+                x:Key="FontAwesomeSolid"> 
+        <On Platform="Android" 
+            Value="FontAwesome5Solid.otf#Regular" /> 
+        <On Platform="iOS" 
+            Value="FontAwesome5Free-Solid" /> 
+    </OnPlatform> 
+    
+    <OnPlatform x:TypeArguments="x:String" 
+                x:Key="FontAwesomeRegular">
+        <On Platform="Android" 
+            Value="FontAwesome5Regular.otf#Regular" /> 
+        <On Platform="iOS" 
+            Value="FontAwesome5Free-Regular" /> 
+    </OnPlatform>
+        <OnPlatform x:TypeArguments="x:String" 
+                    x:Key="InterMedium">
+        <On Platform="Android" 
+            Value="InterMedium.ttf#Medium" /> 
+        <On Platform="iOS" 
+            Value="Inter-Medium" /> 
+    </OnPlatform>
+
+    <OnPlatform x:TypeArguments="x:String" 
+                x:Key="InterBold">
+        <On Platform="Android" 
+            Value="InterBold.ttf#Bold" /> 
+        <On Platform="iOS" 
+            Value="Inter-Bold" /> 
+    </OnPlatform>
+
+    <OnPlatform x:TypeArguments="x:String" 
+                x:Key="InterLight"> 
+        <On Platform="Android" 
+            Value="InterLight.ttf#Light" /> 
+        <On Platform="iOS" 
+            Value="Inter-Light" /> 
+    </OnPlatform>
+    <Style TargetType="Label">
+        <Setter Property="FontFamily"
+                Value="{StaticResource InterLight}"/>
+    </Style>
+    <Style TargetType="Button">
+        <Setter Property="FontFamily"
+                Value="{StaticResource InterLight}"/>
+    </Style>
+
+    <Style x:Key="buttonContainerStyle"
+           TargetType="yummy:PancakeView">
+        <Setter Property="HasShadow"
+                Value="True"/>
+        <Setter Property="Elevation"
+                Value="5"/>
+        <Setter Property="CornerRadius"
+                Value="10"/>
+    </Style>
+
+    <Style x:Key="cardContainerStyle"
+           TargetType="yummy:PancakeView">
+        <Setter Property="HasShadow"
+                Value="True"/>
+        <Setter Property="Elevation"
+                Value="5"/>
+        <Setter Property="CornerRadius"
+                Value="10"/>
+        <Setter Property="Opacity"
+                Value="0"/>
+        <Setter Property="TranslationY"
+                Value="100"/>
+         <Setter Property="BackgroundColor"
+                Value="{DynamicResource background}"/>
+    </Style>
+
+    <Style x:Key="cardTitleStyle"
+           TargetType="Label">
+        <Setter Property="FontSize"
+                Value="Large"/>
+        <Setter Property="TextColor"
+                Value="{DynamicResource mainLabel}"/>
+        <Setter Property="FontFamily"
+                Value="{DynamicResource InterBold}"/>
+    </Style>
+
+    <Style x:Key="borderStyle"
+           TargetType="BoxView">
+        <Setter Property="BackgroundColor"
+                Value="{DynamicResource borderColor}"/>
+        <Setter Property="HeightRequest"
+                Value="1"/>
+    </Style>
+
+    <Style x:Key="listOptionLayoutStyle"
+           TargetType="yummy:PancakeView">
+        <Setter Property="BorderColor"
+                Value="{StaticResource primaryColor}"/>
+         <Setter Property="BorderThickness"
+                Value="1"/>
+        <Setter Property="VerticalOptions"
+                Value="CenterAndExpand"/>
+    </Style>
+    <Style x:Key="listOptionLayoutTextStyle"
+           TargetType="Label">
+         <Setter Property="Padding"
+                Value="10"/>
+        <Setter Property="VerticalOptions"
+                Value="CenterAndExpand"/>
+        <Setter Property="TextColor"
+                Value="{StaticResource primaryColor}"/>
+    </Style>
+</ResourceDictionary>

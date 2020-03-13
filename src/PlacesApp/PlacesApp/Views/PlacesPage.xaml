@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:sharedTransitions="clr-namespace:Plugin.SharedTransitions;assembly=Plugin.SharedTransitions"
+             sharedTransitions:SharedTransitionNavigationPage.TransitionSelectedGroup="{Binding SelectedItemId}"
+             sharedTransitions:SharedTransitionNavigationPage.BackgroundAnimation="SlideFromRight"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:controls="clr-namespace:PlacesApp.Controls" xmlns:components="clr-namespace:PlacesApp.Components"
+             xmlns:fontawesome="clr-namespace:FontAwesome"
+             xmlns:models="clr-namespace:PlacesApp.Models"
+             x:Name="MainPage"
+             BackgroundColor="{DynamicResource mainBackground}"
+             x:Class="PlacesApp.Views.PlacesPage">
+    
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal"
+                     Padding="10, 0">
+            <Label Text="Locations"
+                   FontSize="Title"
+                   TextColor="{DynamicResource mainLabel}"
+                   FontFamily="{StaticResource InterBold}"
+                   VerticalOptions="CenterAndExpand"
+                   HorizontalOptions="StartAndExpand"/>
+            <yummy:PancakeView CornerRadius="20"
+                               HasShadow="True"
+                               HeightRequest="40"
+                               WidthRequest="40"
+                               VerticalOptions="CenterAndExpand"
+                               Elevation="1">
+                <ffimageloading:CachedImage Source="https://www.venmond.com/demo/vendroid/img/avatar/big.jpg"
+                                            Aspect="AspectFill"/>
+            </yummy:PancakeView>
+        </StackLayout>
+    </NavigationPage.TitleView>
+
+        <StackLayout Spacing="0"
+                     Margin="{OnPlatform Android='0, 50, 0, 0', iOS='0'}">
+            <StackLayout Orientation="Horizontal"
+                         Margin="0, 0, 10, 0"
+                         Spacing="0">
+                <controls:CarouselIndicatorView Items="{Binding TabItems}"
+                                                BackgroundColor="{DynamicResource mainBackground}"
+                                                CurrentItem="{Binding Item}"/>
+                <!--#region ListLayoutOptions-->
+                <yummy:PancakeView Style="{StaticResource listOptionLayoutStyle}"
+                                   HorizontalOptions="EndAndExpand"
+                                   CornerRadius="5, 0, 5 ,0">
+                     <yummy:PancakeView.Triggers>
+                        <DataTrigger TargetType="yummy:PancakeView"
+                                     Binding="{Binding ListLayout}"
+                                     Value="{x:Static models:ListLayoutOptions.Big}">
+                            <Setter Property="BackgroundColor"
+                                    Value="{StaticResource primaryColor}"/>
+                        </DataTrigger>
+                    </yummy:PancakeView.Triggers>
+                     <Label Text="{x:Static fontawesome:FontAwesomeIcons.SquareFull}"
+                            Style="{StaticResource listOptionLayoutTextStyle}"
+                            FontFamily="{DynamicResource FontAwesomeSolid}">
+                         <Label.Triggers>
+                            <DataTrigger TargetType="Label"
+                                         Binding="{Binding ListLayout}"
+                                         Value="{x:Static models:ListLayoutOptions.Big}">
+                                <Setter Property="TextColor"
+                                        Value="{DynamicResource background }"/>
+                            </DataTrigger>
+                        </Label.Triggers>
+                         <Label.GestureRecognizers>
+                            <TapGestureRecognizer  Command="{Binding ChangeLayoutCommand}"
+                                                   CommandParameter="{x:Static models:ListLayoutOptions.Big}"/>
+                        </Label.GestureRecognizers>
+                     </Label>
+                 </yummy:PancakeView>
+
+                <yummy:PancakeView Style="{StaticResource listOptionLayoutStyle}"
+                                   CornerRadius="0, 5, 0, 5">
+                    <yummy:PancakeView.Triggers>
+                        <DataTrigger TargetType="yummy:PancakeView"
+                                     Binding="{Binding ListLayout}"
+                                     Value="{x:Static models:ListLayoutOptions.Small}">
+                            <Setter Property="BackgroundColor"
+                                    Value="{StaticResource primaryColor}"/>
+                        </DataTrigger>
+                    </yummy:PancakeView.Triggers>
+                    <Label Text="{x:Static fontawesome:FontAwesomeIcons.ThList}"
+                           Style="{StaticResource listOptionLayoutTextStyle}"
+                           FontFamily="{DynamicResource FontAwesomeSolid}">
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label"
+                                         Binding="{Binding ListLayout}"
+                                         Value="{x:Static models:ListLayoutOptions.Small}">
+                                <Setter Property="TextColor"
+                                        Value="{DynamicResource background }"/>
+                            </DataTrigger>
+                        </Label.Triggers>
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer  Command="{Binding ChangeLayoutCommand}"
+                                                   CommandParameter="{x:Static models:ListLayoutOptions.Small}"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </yummy:PancakeView>
+                <!--#region-->
+            </StackLayout>
+
+            <BoxView Style="{StaticResource borderStyle}"
+                     VerticalOptions="End"/>
+
+            <StackLayout>
+                <CarouselView ItemsSource="{Binding TabItems}"
+                              CurrentItem="{Binding Item}"
+                              VerticalScrollBarVisibility="Never"
+                              HorizontalScrollBarVisibility="Never">
+                    <CarouselView.ItemTemplate>
+                    <DataTemplate>
+                        <ScrollView Padding="0, 20, 0, 0">
+                            <FlexLayout BindableLayout.ItemsSource="{Binding Items}"
+                                        Direction="Column"
+                                        Wrap="NoWrap">
+                                <BindableLayout.ItemTemplate>
+                                    <DataTemplate>
+                                            <components:PlaceComponent GoToDetailCommand="{Binding BindingContext.GoToDetailCommand, Source={x:Reference MainPage}}"
+                                                                       ListLayout="{Binding BindingContext.ListLayout, Source={x:Reference MainPage}}"/>
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate>
+                            </FlexLayout>
+                        </ScrollView>
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+                </CarouselView>
+            </StackLayout>
+
+        </StackLayout>
+</ContentPage>

@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<sharedtransitions:SharedTransitionNavigationPage  xmlns:sharedtransitions="clr-namespace:Plugin.SharedTransitions;assembly=Plugin.SharedTransitions"
+                                                   xmlns="http://xamarin.com/schemas/2014/forms"
+                                                   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                                                   BarBackgroundColor="Transparent"
+                                                   x:Class="PlacesApp.Controls.ExtendedNavigationPage">
+</sharedtransitions:SharedTransitionNavigationPage>

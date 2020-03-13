@@ -1,0 +1,188 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:sharedTransitions="clr-namespace:Plugin.SharedTransitions;assembly=Plugin.SharedTransitions"
+             xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:controls="clr-namespace:PlacesApp.Controls"
+             xmlns:fontawesome="clr-namespace:FontAwesome"
+             BackgroundColor="{DynamicResource mainBackground}"
+             xmlns:prism="http://prismlibrary.com"
+             x:Class="PlacesApp.Views.PlaceDetailPage">
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal"
+                     Padding="10, 0">
+            <Button Text="{x:Static fontawesome:FontAwesomeIcons.ChevronLeft}"
+                    BackgroundColor="{DynamicResource mainBackground}"
+                    TextColor="{DynamicResource mainLabel}"
+                    FontFamily="{StaticResource FontAwesomeSolid}"
+                    WidthRequest="40"
+                    Command="{prism:GoBack }"
+                    HeightRequest="40"
+                    CornerRadius="10"/>
+            <yummy:PancakeView CornerRadius="20"
+                               HasShadow="True"
+                               HorizontalOptions="EndAndExpand"
+                               HeightRequest="40"
+                               WidthRequest="40"
+                               VerticalOptions="CenterAndExpand"
+                               Elevation="1">
+                <ffimageloading:CachedImage Source="https://www.venmond.com/demo/vendroid/img/avatar/big.jpg"
+                                            Aspect="AspectFill"/>
+            </yummy:PancakeView>
+        </StackLayout>
+    </NavigationPage.TitleView>
+    <ContentPage.Content>
+       <controls:ExtendedScrollView HasTopPadding="False">
+           <StackLayout Padding="0, 0, 0, 40">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <ffimageloading:CachedImage Source="{Binding Place.Image}"
+                                                sharedTransitions:Transition.Name="dogtransition"
+                                                HeightRequest="400"
+                                                Aspect="AspectFill"/>
+                    <yummy:PancakeView Grid.Row="1"
+                                       x:Name="detailContainer"
+                                       Style="{StaticResource cardContainerStyle}"
+                                       Margin="20, -50, 20, 0">
+                        <Grid Padding="10, 15"
+                              RowSpacing="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Label Text="{Binding Place.Title}"
+                                   Style="{StaticResource cardTitleStyle}"
+                                   Margin="10, 0, 0 , 0"/>
+                            <Label Text="{Binding Place.SubTitle}"
+                                   Margin="10, 0, 0 , 10"
+                                   FontSize="Small"
+                                   TextColor="{DynamicResource secondaryLabel}"
+                                   Grid.Row="1"/>
+                            <BoxView Style="{StaticResource borderStyle}"
+                                     Grid.Row="2"/>
+                            <StackLayout Grid.Row="3"
+                                         Padding="15"
+                                         Orientation="Horizontal">
+                                <Label HorizontalOptions="StartAndExpand"
+                                       FontSize="Medium"
+                                       TextColor="{DynamicResource secondaryLabel}">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="Date: &#160;"/>
+                                            <Span Text="18 Aug 2020"
+                                                  TextColor="{DynamicResource mainLabel}"
+                                                  FontFamily="{StaticResource InterMedium}"/>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <Label TextColor="{DynamicResource secondaryLabel}"
+                                       FontSize="Medium">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="Duration: &#160;" />
+                                            <Span Text="6 Days"
+                                                  TextColor="{DynamicResource mainLabel}"
+                                                  FontFamily="{StaticResource InterMedium}" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                            </StackLayout>
+                            <BoxView Style="{StaticResource borderStyle}"
+                                     Grid.Row="4"/>
+                            <StackLayout Orientation="Horizontal"
+                                         Spacing="30"
+                                         Padding="15"
+                                         Grid.Row="5">
+                                <yummy:PancakeView Style="{StaticResource buttonContainerStyle}"
+                                                   HorizontalOptions="FillAndExpand">
+                                <Button Text="Booking"
+                                        CornerRadius="10"
+                                        BackgroundColor="#3596fc"
+                                        TextColor="White"/>
+                                    </yummy:PancakeView>
+                                <yummy:PancakeView Style="{StaticResource buttonContainerStyle}"
+                                                   HorizontalOptions="FillAndExpand">
+                                    <Button Text="Contact"
+                                            TextColor="White"
+                                            CornerRadius="10"
+                                            BackgroundColor="#5fc567"/>
+                                </yummy:PancakeView>
+                            </StackLayout>
+
+                        </Grid>
+                    </yummy:PancakeView>
+
+                    <yummy:PancakeView Grid.Row="2"
+                                       Style="{StaticResource cardContainerStyle}"
+                                       x:Name="descriptionContainer"
+                                       Margin="20, 20, 20, 0">
+                       <Grid Padding="10, 15"
+                              RowSpacing="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Label Text="Description"
+                                   Style="{StaticResource cardTitleStyle}"
+                                   Margin="10, 0, 0, 10"/>
+                            <BoxView Style="{StaticResource borderStyle}"
+                                     Grid.Row="1"/>
+                           <Label Text="{Binding Place.Description}"
+                                   Margin="10"
+                                   FontSize="Small"
+                                   TextColor="{DynamicResource secondaryLabel}"
+                                   Grid.Row="2"/>
+                            <BoxView Style="{StaticResource borderStyle}"
+                                     Grid.Row="3"/>
+                           <Label Text="Photos"
+                                   Grid.Row="4"
+                                   Style="{StaticResource cardTitleStyle}"
+                                   Margin=" 10"/>
+                            <BoxView Style="{StaticResource borderStyle}"
+                                     Grid.Row="5"/>
+                           <CarouselView ItemsSource="{Binding Place.Images}"
+                                         HorizontalScrollBarVisibility="Never"
+                                         HeightRequest="300"
+                                         PeekAreaInsets="40"
+                                         Grid.Row="6">
+                               <CarouselView.ItemsLayout>
+                                    <LinearItemsLayout Orientation="Horizontal"
+                                                       SnapPointsAlignment="Center"
+                                                       SnapPointsType="MandatorySingle"
+                                                       ItemSpacing="20" />
+                                </CarouselView.ItemsLayout>
+                               <CarouselView.ItemTemplate>
+                                   <DataTemplate>
+                                       <StackLayout Padding="0, 20">
+                                           <yummy:PancakeView CornerRadius="10"
+                                                              VerticalOptions="FillAndExpand"
+                                                              HasShadow="True"
+                                                              Elevation="5">
+                                               <ffimageloading:CachedImage Source="{Binding }"
+                                                                       Aspect="AspectFill"/>
+                                           </yummy:PancakeView>
+                                       </StackLayout>
+                                   </DataTemplate>
+                               </CarouselView.ItemTemplate>
+                           </CarouselView>
+                       </Grid>
+                    </yummy:PancakeView>
+                </Grid>
+            </StackLayout>
+       </controls:ExtendedScrollView>
+    </ContentPage.Content>
+</ContentPage>

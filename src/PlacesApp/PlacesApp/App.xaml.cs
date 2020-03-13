@@ -1,28 +1,30 @@
-﻿using System;
+﻿using PlacesApp.Controls;
+using PlacesApp.Views;
+using Prism;
+using Prism.Ioc;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace PlacesApp
 {
-    public partial class App : Application
+    [AutoRegisterForNavigation]
+    public partial class App
     {
-        public App()
+        public static Theme AppTheme { get; set; }
+        public App() : this(null) { }
+
+        public App(IPlatformInitializer initializer) : base(initializer) { }
+
+        protected override async void OnInitialized()
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            await NavigationService.NavigateAsync($"{nameof(ExtendedNavigationPage)}/{nameof(PlacesPage)}");
         }
 
-        protected override void OnStart()
+        protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-        }
-
-        protected override void OnSleep()
-        {
-        }
-
-        protected override void OnResume()
-        {
+            containerRegistry.RegisterForNavigation<ExtendedNavigationPage>();
         }
     }
+    public enum Theme { Light, Dark }
 }
