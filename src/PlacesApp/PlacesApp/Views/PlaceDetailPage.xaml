@@ -6,17 +6,17 @@
              xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              xmlns:controls="clr-namespace:PlacesApp.Controls"
              xmlns:fontawesome="clr-namespace:FontAwesome"
-             BackgroundColor="#f6f6f6"
+             BackgroundColor="{DynamicResource mainBackground}"
              xmlns:prism="http://prismlibrary.com"
              x:Class="PlacesApp.Views.PlaceDetailPage">
     <NavigationPage.TitleView>
         <StackLayout Orientation="Horizontal"
                      Padding="10, 0">
             <Button Text="{x:Static fontawesome:FontAwesomeIcons.ChevronLeft}"
-                    BackgroundColor="#90FFFFFF"
+                    BackgroundColor="{DynamicResource mainBackground}"
+                    TextColor="{DynamicResource mainLabel}"
                     FontFamily="{StaticResource FontAwesomeSolid}"
                     WidthRequest="40"
-                    TextColor="Black"
                     Command="{prism:GoBack }"
                     HeightRequest="40"
                     CornerRadius="10"/>
@@ -46,12 +46,8 @@
                                                 HeightRequest="400"
                                                 Aspect="AspectFill"/>
                     <yummy:PancakeView Grid.Row="1"
-                                       BackgroundColor="White"
-                                       HasShadow="True"
-                                       TranslationY="50"
-                                       Opacity="0"
                                        x:Name="detailContainer"
-                                       CornerRadius="10"
+                                       Style="{StaticResource cardContainerStyle}"
                                        Margin="20, -50, 20, 0">
                         <Grid Padding="10, 15"
                               RowSpacing="0">
@@ -64,68 +60,61 @@
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
                             <Label Text="{Binding Place.Title}"
-                                   FontSize="20"
-                                   FontFamily="{StaticResource InterBold}"
-                                   TextColor="#403e46"
+                                   Style="{StaticResource cardTitleStyle}"
                                    Margin="10, 0, 0 , 0"/>
                             <Label Text="{Binding Place.SubTitle}"
                                    Margin="10, 0, 0 , 10"
-                                   FontSize="15"
-                                   TextColor="#403e46"
+                                   FontSize="Small"
+                                   TextColor="{DynamicResource secondaryLabel}"
                                    Grid.Row="1"/>
-                            <BoxView HeightRequest="1"
-                                     BackgroundColor="#DDD"
+                            <BoxView Style="{StaticResource borderStyle}"
                                      Grid.Row="2"/>
                             <StackLayout Grid.Row="3"
                                          Padding="15"
                                          Orientation="Horizontal">
                                 <Label HorizontalOptions="StartAndExpand"
-                                   TextColor="#403e46">
+                                       FontSize="Medium"
+                                       TextColor="{DynamicResource secondaryLabel}">
                                     <Label.FormattedText>
                                         <FormattedString>
-                                            <Span Text="Date: &#160;&#160;"/>
+                                            <Span Text="Date: &#160;"/>
                                             <Span Text="18 Aug 2020"
+                                                  TextColor="{DynamicResource mainLabel}"
                                                   FontFamily="{StaticResource InterMedium}"/>
                                         </FormattedString>
                                     </Label.FormattedText>
                                 </Label>
-                                <Label
-                                   TextColor="#403e46">
+                                <Label TextColor="{DynamicResource secondaryLabel}"
+                                       FontSize="Medium">
                                     <Label.FormattedText>
                                         <FormattedString>
-                                            <Span Text="Duration: &#160;&#160;" />
+                                            <Span Text="Duration: &#160;" />
                                             <Span Text="6 Days"
+                                                  TextColor="{DynamicResource mainLabel}"
                                                   FontFamily="{StaticResource InterMedium}" />
                                         </FormattedString>
                                     </Label.FormattedText>
                                 </Label>
                             </StackLayout>
-                            <BoxView HeightRequest="1"
-                                     BackgroundColor="#DDD"
+                            <BoxView Style="{StaticResource borderStyle}"
                                      Grid.Row="4"/>
                             <StackLayout Orientation="Horizontal"
                                          Spacing="30"
                                          Padding="15"
                                          Grid.Row="5">
-                                <yummy:PancakeView
-                                        HorizontalOptions="FillAndExpand"
-                                        CornerRadius="10"
-                                        Elevation="5"
-                                        HasShadow="True">
+                                <yummy:PancakeView Style="{StaticResource buttonContainerStyle}"
+                                                   HorizontalOptions="FillAndExpand">
                                 <Button Text="Booking"
                                         CornerRadius="10"
                                         BackgroundColor="#3596fc"
                                         TextColor="White"/>
                                     </yummy:PancakeView>
-                                <yummy:PancakeView
-                                        HasShadow="True"
-                                        CornerRadius="10"
-                                        Elevation="5"
-                                        HorizontalOptions="FillAndExpand">
+                                <yummy:PancakeView Style="{StaticResource buttonContainerStyle}"
+                                                   HorizontalOptions="FillAndExpand">
                                     <Button Text="Contact"
-                                        TextColor="White"
-                                        CornerRadius="10"
-                                        BackgroundColor="#5fc567"/>
+                                            TextColor="White"
+                                            CornerRadius="10"
+                                            BackgroundColor="#5fc567"/>
                                 </yummy:PancakeView>
                             </StackLayout>
 
@@ -133,13 +122,8 @@
                     </yummy:PancakeView>
 
                     <yummy:PancakeView Grid.Row="2"
-                                       BackgroundColor="White"
-                                       HasShadow="True"
-                                       CornerRadius="10"
-                                       TranslationY="50"
+                                       Style="{StaticResource cardContainerStyle}"
                                        x:Name="descriptionContainer"
-                                       Opacity="0"
-                                       Elevation="5"
                                        Margin="20, 20, 20, 0">
                        <Grid Padding="10, 15"
                               RowSpacing="0">
@@ -153,29 +137,22 @@
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
                             <Label Text="Description"
-                                   FontFamily="{StaticResource InterBold}"
-                                   FontSize="20"
-                                   TextColor="#403e46"
+                                   Style="{StaticResource cardTitleStyle}"
                                    Margin="10, 0, 0, 10"/>
-                            <BoxView HeightRequest="1"
-                                     BackgroundColor="#DDD"
+                            <BoxView Style="{StaticResource borderStyle}"
                                      Grid.Row="1"/>
                            <Label Text="{Binding Place.Description}"
                                    Margin="10"
-                                   FontSize="15"
-                                   TextColor="#403e46"
+                                   FontSize="Small"
+                                   TextColor="{DynamicResource secondaryLabel}"
                                    Grid.Row="2"/>
-                            <BoxView HeightRequest="1"
-                                     BackgroundColor="#DDD"
+                            <BoxView Style="{StaticResource borderStyle}"
                                      Grid.Row="3"/>
                            <Label Text="Photos"
-                                   FontSize="20"
                                    Grid.Row="4"
-                                   FontFamily="{StaticResource InterBold}"
-                                   TextColor="#403e46"
+                                   Style="{StaticResource cardTitleStyle}"
                                    Margin=" 10"/>
-                            <BoxView HeightRequest="1"
-                                     BackgroundColor="#DDD"
+                            <BoxView Style="{StaticResource borderStyle}"
                                      Grid.Row="5"/>
                            <CarouselView ItemsSource="{Binding Place.Images}"
                                          HorizontalScrollBarVisibility="Never"

@@ -28,7 +28,7 @@ namespace PlacesApp.Controls
         static void CurrentItemChange(object bindable, object oldValue, object newValue)
         {
             var x = (CarouselIndicatorView)bindable;
-            var labelContainer = x.FindByName("myList") as StackLayout;
+            var labelContainer = x.FindByName("myList") as FlexLayout;
             foreach (Label label in labelContainer.Children)
             {
                 var tabGesture = label.GestureRecognizers[0] as TapGestureRecognizer;

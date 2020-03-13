@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<StackLayout xmlns="http://xamarin.com/schemas/2014/forms"
+      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+      xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+      xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+      xmlns:sharedTransitions="clr-namespace:Plugin.SharedTransitions;assembly=Plugin.SharedTransitions"
+      Margin="20, 5"
+      x:Name="grid"
+      HeightRequest="300"
+      x:Class="PlacesApp.Components.PlaceComponent">
+    <AbsoluteLayout VerticalOptions="FillAndExpand">
+        <yummy:PancakeView HasShadow="True"
+                        x:Name="container"
+                        Elevation="8"
+                        BackgroundColor="{DynamicResource background}"
+                        CornerRadius="10">
+      
+        </yummy:PancakeView>
+         <yummy:PancakeView x:Name="imgContainer"
+                            CornerRadius="10">
+             <ffimageloading:CachedImage Source="{Binding Image}"
+                                    sharedTransitions:Transition.Name="dogtransition"
+                                    sharedTransitions:Transition.Group="{Binding IdAnimation}"
+                                        x:Name="img"
+                                    Aspect="AspectFill"/>
+        </yummy:PancakeView>
+        <StackLayout x:Name="textContainer">
+            <Label Text="{Binding Title}"
+                FontSize="Large"
+                LineBreakMode="TailTruncation"
+                TextColor="{DynamicResource mainLabel}"
+                FontFamily="{StaticResource InterBold}"
+                Margin="0, 20, 0, 0"/>
+        <Label Text="{Binding SubTitle}"
+               LineBreakMode="TailTruncation"
+               TextColor="{DynamicResource secondaryLabel}"
+               VerticalOptions="Center"
+               FontSize="Small"/>
+        </StackLayout>
+    </AbsoluteLayout>
+    <StackLayout.GestureRecognizers>
+        <TapGestureRecognizer Command="{Binding GoToDetailCommand, Source={x:Reference grid}}"
+                              CommandParameter="{Binding }"/>
+    </StackLayout.GestureRecognizers>
+</StackLayout>

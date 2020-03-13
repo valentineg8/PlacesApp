@@ -20,13 +20,22 @@ namespace PlacesApp.ViewModels
         public ObservableCollection<Tab> TabItems { get; set; }
         public Tab Item { get; set; }
         public string SelectedItemId { get; set; }
+        public ListLayoutOptions ListLayout { get; set; }
         public string Section { get; set; }
         public DelegateCommand<Place> GoToDetailCommand { get; set; }
+        public DelegateCommand<object> ChangeLayoutCommand { get; set; }
         public PlacesPageViewModel(INavigationService  navigationPage) : base(navigationPage)
         {
             GoToDetailCommand = new DelegateCommand<Place>(GoToDetail);
             Items = new ObservableCollection<Place>();
             Item = new Tab();
+            ListLayout = ListLayoutOptions.Big;
+
+            ChangeLayoutCommand = new DelegateCommand<object>(ChangeLayout);
+        }
+        void ChangeLayout(object listLayout)
+        {
+            ListLayout = (ListLayoutOptions)listLayout;
         }
         async void GoToDetail(Place place)
         {
@@ -63,7 +72,7 @@ namespace PlacesApp.ViewModels
                     SubTitle = element.SubTitle,
                     Images = element.Images,
                     Image = element.Image,
-                    IdAnimation = $"All{Guid.NewGuid().ToString()}"
+                    IdAnimation = $"All{Guid.NewGuid()}"
                 });
                 if (element.IsTrending)
                     trending.Add(new Place {
@@ -73,7 +82,7 @@ namespace PlacesApp.ViewModels
                         SubTitle = element.SubTitle,
                         Images = element.Images,
                         Image = element.Image,
-                        IdAnimation = $"Trending{Guid.NewGuid().ToString()}"
+                        IdAnimation = $"Trending{Guid.NewGuid()}"
                     }); 
 
                 if (element.IsFeatured)
@@ -85,7 +94,7 @@ namespace PlacesApp.ViewModels
                         SubTitle = element.SubTitle,
                         Images = element.Images,
                         Image = element.Image,
-                        IdAnimation = $"Featured${Guid.NewGuid().ToString()}"
+                        IdAnimation = $"Featured${Guid.NewGuid()}"
                     });
 
                 if (element.IsPopular)
@@ -97,7 +106,7 @@ namespace PlacesApp.ViewModels
                         SubTitle = element.SubTitle,
                         Images = element.Images,
                         Image = element.Image,
-                        IdAnimation = $"Popular{Guid.NewGuid().ToString()}"
+                        IdAnimation = $"Popular{Guid.NewGuid()}"
                     });
             }
 

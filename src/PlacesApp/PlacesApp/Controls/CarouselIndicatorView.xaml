@@ -3,20 +3,17 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
       x:Class="PlacesApp.Controls.CarouselIndicatorView"
       x:Name="Indicator"
-      BackgroundColor="White"
+      BackgroundColor="{DynamicResource mainBackground}"
       RowSpacing="0">
-    <Grid.RowDefinitions>
-        <RowDefinition Height="Auto" />
-        <RowDefinition Height="Auto" />
-        <RowDefinition Height="Auto" />
-    </Grid.RowDefinitions>
-    <StackLayout BindableLayout.ItemsSource="{Binding Items, Source={x:Reference Indicator}}"
-                 Orientation="Horizontal"
+    <FlexLayout BindableLayout.ItemsSource="{Binding Items, Source={x:Reference Indicator}}"
+                JustifyContent="SpaceAround"
                 x:Name="myList">
         <BindableLayout.ItemTemplate>
            <DataTemplate>
                <Label Text="{Binding Title}"
                       HeightRequest="50"
+                      FontSize="Small"
+                      TextColor="{DynamicResource mainLabel}"
                       VerticalTextAlignment="Center"
                       HorizontalTextAlignment="Center"
                       Padding="15, 0">
@@ -27,15 +24,12 @@
                 </Label>
            </DataTemplate>
         </BindableLayout.ItemTemplate>
-    </StackLayout>
+    </FlexLayout>
     <BoxView HeightRequest="3"
              WidthRequest="50"
+             VerticalOptions="End"
              x:Name="activeIndicator"
              HorizontalOptions="Start"
-             Grid.Row="1"
-             BackgroundColor="#3596fc"/>
-     <BoxView HeightRequest="1"
-              Grid.Row="2"
-              VerticalOptions="End"
-              BackgroundColor="#DDD"/>
+             BackgroundColor="{DynamicResource primaryColor}"/>
+     
 </Grid>

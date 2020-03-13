@@ -9,6 +9,7 @@ namespace PlacesApp
     [AutoRegisterForNavigation]
     public partial class App
     {
+        public static Theme AppTheme { get; set; }
         public App() : this(null) { }
 
         public App(IPlatformInitializer initializer) : base(initializer) { }
@@ -25,4 +26,5 @@ namespace PlacesApp
             containerRegistry.RegisterForNavigation<ExtendedNavigationPage>();
         }
     }
+    public enum Theme { Light, Dark }
 }

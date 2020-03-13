@@ -6,6 +6,8 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using PlacesApp.Styles;
+using Android.Content.Res;
 
 namespace PlacesApp.Droid
 {
@@ -24,6 +26,7 @@ namespace PlacesApp.Droid
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App());
+            SetAppTheme();
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
@@ -31,5 +34,30 @@ namespace PlacesApp.Droid
 
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
+        void SetAppTheme()
+        {
+            if (Resources.Configuration.UiMode.HasFlag(UiMode.NightYes))
+                SetTheme(PlacesApp.Theme.Dark);
+            else
+                SetTheme(PlacesApp.Theme.Light);
+        }
+
+        void SetTheme(Theme mode)
+        {
+            if (mode == PlacesApp.Theme.Dark)
+            {
+                if (App.AppTheme == PlacesApp.Theme.Dark)
+                    return;
+                App.Current.Resources = new DarkTheme();
+            }
+            else
+            {
+                if (App.AppTheme != PlacesApp.Theme.Dark)
+                    return;
+                App.Current.Resources = new LightTheme();
+            }
+            App.AppTheme = mode;
+        }
+
     }
 }

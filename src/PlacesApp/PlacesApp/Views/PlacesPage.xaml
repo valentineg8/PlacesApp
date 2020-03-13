@@ -4,17 +4,23 @@
              xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              xmlns:sharedTransitions="clr-namespace:Plugin.SharedTransitions;assembly=Plugin.SharedTransitions"
              sharedTransitions:SharedTransitionNavigationPage.TransitionSelectedGroup="{Binding SelectedItemId}"
-             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms" xmlns:controls="clr-namespace:PlacesApp.Controls"
+             sharedTransitions:SharedTransitionNavigationPage.BackgroundAnimation="SlideFromRight"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:controls="clr-namespace:PlacesApp.Controls" xmlns:components="clr-namespace:PlacesApp.Components"
+             xmlns:fontawesome="clr-namespace:FontAwesome"
+             xmlns:models="clr-namespace:PlacesApp.Models"
              x:Name="MainPage"
-             BackgroundColor="White"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="true"
+             BackgroundColor="{DynamicResource mainBackground}"
              x:Class="PlacesApp.Views.PlacesPage">
     
     <NavigationPage.TitleView>
         <StackLayout Orientation="Horizontal"
                      Padding="10, 0">
             <Label Text="Locations"
-                   FontSize="28"
-                   TextColor="#403e46"
+                   FontSize="Title"
+                   TextColor="{DynamicResource mainLabel}"
                    FontFamily="{StaticResource InterBold}"
                    VerticalOptions="CenterAndExpand"
                    HorizontalOptions="StartAndExpand"/>
@@ -31,97 +37,98 @@
     </NavigationPage.TitleView>
 
         <StackLayout Spacing="0"
-                     Margin="{OnPlatform Android='0, 50, 0, 0', iOS='0, 100, 0, 0'}">
-            <controls:CarouselIndicatorView Items="{Binding TabItems}"
-                                            CurrentItem="{Binding Item}"/>
-                <StackLayout>
-                    <CarouselView ItemsSource="{Binding TabItems}"
-                                CurrentItem="{Binding Item}"
-                                HorizontalScrollBarVisibility="Never"
-                                CurrentItemChangedCommand="{Binding ChangeSectionCommand}"
-                                CurrentItemChangedCommandParameter="{Binding Item}">
-                        <CarouselView.ItemTemplate>
-                        <DataTemplate>
-                            <ScrollView>
-                                <FlexLayout BindableLayout.ItemsSource="{Binding Items}"
-                                            Direction="Column"
-                                            Wrap="NoWrap">
-                                    <BindableLayout.ItemTemplate>
-                                        <DataTemplate>
-                                            <StackLayout Orientation="Vertical"
-                                                            HeightRequest="300">
-                                                <Grid Padding="20, 10"
-                                                        HorizontalOptions="FillAndExpand"
-                                                        RowSpacing="0">
-                                                    <Grid.RowDefinitions>
-                                                        <RowDefinition Height="200" />
-                                                        <RowDefinition Height="Auto" />
-                                                        <RowDefinition Height="Auto" />
-                                                    </Grid.RowDefinitions>
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="*" />
-                                                        <ColumnDefinition Width="60" />
-                                                    </Grid.ColumnDefinitions>
-                                                    <yummy:PancakeView Grid.Row="0"
-                                                                        Grid.ColumnSpan="2"
-                                                                        HasShadow="True"
-                                                                        Elevation="8"
-                                                                        CornerRadius="10">
-                                                        <ffimageloading:CachedImage Source="{Binding Image}"
-                                                                                    sharedTransitions:Transition.Name="dogtransition"
-                                                                                    sharedTransitions:Transition.Group="{Binding IdAnimation}"
-                                                                                    VerticalOptions="FillAndExpand"
-                                                                                    Aspect="AspectFill"/>
-                                                    </yummy:PancakeView>
-                                                    <Label Text="{Binding Title}"
-                                                            FontSize="20"
-                                                            TextColor="#403e46"
-                                                            FontFamily="{StaticResource InterBold}"
-                                                            Margin="0, 20, 0, 0"
-                                                            Grid.Row="1"/>
-                                                    <Label Text="{Binding SubTitle}"
-                                                            LineBreakMode="TailTruncation"
-                                                            VerticalOptions="Center"
-                                                            FontSize="14"
-                                                            Grid.Row="2"/>
+                     Margin="{OnPlatform Android='0, 50, 0, 0', iOS='0'}">
+            <StackLayout Orientation="Horizontal"
+                         Margin="0, 0, 10, 0"
+                         Spacing="0">
+                <controls:CarouselIndicatorView Items="{Binding TabItems}"
+                                                BackgroundColor="{DynamicResource mainBackground}"
+                                                CurrentItem="{Binding Item}"/>
+                <!--#region ListLayoutOptions-->
+                <yummy:PancakeView Style="{StaticResource listOptionLayoutStyle}"
+                                   HorizontalOptions="EndAndExpand"
+                                   CornerRadius="5, 0, 5 ,0">
+                     <yummy:PancakeView.Triggers>
+                        <DataTrigger TargetType="yummy:PancakeView"
+                                     Binding="{Binding ListLayout}"
+                                     Value="{x:Static models:ListLayoutOptions.Big}">
+                            <Setter Property="BackgroundColor"
+                                    Value="{StaticResource primaryColor}"/>
+                        </DataTrigger>
+                    </yummy:PancakeView.Triggers>
+                     <Label Text="{x:Static fontawesome:FontAwesomeIcons.SquareFull}"
+                            Style="{StaticResource listOptionLayoutTextStyle}"
+                            FontFamily="{DynamicResource FontAwesomeSolid}">
+                         <Label.Triggers>
+                            <DataTrigger TargetType="Label"
+                                         Binding="{Binding ListLayout}"
+                                         Value="{x:Static models:ListLayoutOptions.Big}">
+                                <Setter Property="TextColor"
+                                        Value="{DynamicResource background }"/>
+                            </DataTrigger>
+                        </Label.Triggers>
+                         <Label.GestureRecognizers>
+                            <TapGestureRecognizer  Command="{Binding ChangeLayoutCommand}"
+                                                   CommandParameter="{x:Static models:ListLayoutOptions.Big}"/>
+                        </Label.GestureRecognizers>
+                     </Label>
+                 </yummy:PancakeView>
 
-                                                    <yummy:PancakeView Grid.Row="1"
-                                                                        Grid.RowSpan="2"
-                                                                        Elevation="5"
-                                                                        Grid.Column="1"
-                                                                        BackgroundColor="White"
-                                                                        HasShadow="True"
-                                                                        Padding="0, 5"
-                                                                        Margin="0, 15, 0, 0"
-                                                                        CornerRadius="10">
-                                                        <Label HorizontalOptions="CenterAndExpand"
-                                                                VerticalOptions="CenterAndExpand">
-                                                            <Label.FormattedText>
-                                                                <FormattedString>
-                                                                    <Span Text="18 &#10;"
-                                                                          FontFamily="{StaticResource InterBold}"
-                                                                          FontSize="20"/>
-                                                                    <Span Text="Aug"
-                                                                          FontSize="15"
-                                                                          FontFamily="{StaticResource InterMedium}" />
-                                                                </FormattedString>
-                                                            </Label.FormattedText>
-                                                        </Label>
-                                                    </yummy:PancakeView>
-                                                    <Grid.GestureRecognizers>
-                                                        <TapGestureRecognizer Command="{Binding BindingContext.GoToDetailCommand, Source={x:Reference MainPage}}"
-                                                                                CommandParameter="{Binding }"/>
-                                                    </Grid.GestureRecognizers>
-                                                </Grid>
-                                            </StackLayout>
-                                        </DataTemplate>
-                                    </BindableLayout.ItemTemplate>
-                                </FlexLayout>
-                            </ScrollView>
-                        </DataTemplate>
-                    </CarouselView.ItemTemplate>
-                    </CarouselView>
-                </StackLayout>
+                <yummy:PancakeView Style="{StaticResource listOptionLayoutStyle}"
+                                   CornerRadius="0, 5, 0, 5">
+                    <yummy:PancakeView.Triggers>
+                        <DataTrigger TargetType="yummy:PancakeView"
+                                     Binding="{Binding ListLayout}"
+                                     Value="{x:Static models:ListLayoutOptions.Small}">
+                            <Setter Property="BackgroundColor"
+                                    Value="{StaticResource primaryColor}"/>
+                        </DataTrigger>
+                    </yummy:PancakeView.Triggers>
+                    <Label Text="{x:Static fontawesome:FontAwesomeIcons.ThList}"
+                           Style="{StaticResource listOptionLayoutTextStyle}"
+                           FontFamily="{DynamicResource FontAwesomeSolid}">
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label"
+                                         Binding="{Binding ListLayout}"
+                                         Value="{x:Static models:ListLayoutOptions.Small}">
+                                <Setter Property="TextColor"
+                                        Value="{DynamicResource background }"/>
+                            </DataTrigger>
+                        </Label.Triggers>
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer  Command="{Binding ChangeLayoutCommand}"
+                                                   CommandParameter="{x:Static models:ListLayoutOptions.Small}"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </yummy:PancakeView>
+                <!--#region-->
+            </StackLayout>
+
+            <BoxView Style="{StaticResource borderStyle}"
+                     VerticalOptions="End"/>
+
+            <StackLayout>
+                <CarouselView ItemsSource="{Binding TabItems}"
+                              CurrentItem="{Binding Item}"
+                              HorizontalScrollBarVisibility="Never">
+                    <CarouselView.ItemTemplate>
+                    <DataTemplate>
+                        <ScrollView Padding="0, 20, 0, 0">
+                            <FlexLayout BindableLayout.ItemsSource="{Binding Items}"
+                                        Direction="Column"
+                                        Wrap="NoWrap">
+                                <BindableLayout.ItemTemplate>
+                                    <DataTemplate>
+                                            <components:PlaceComponent GoToDetailCommand="{Binding BindingContext.GoToDetailCommand, Source={x:Reference MainPage}}"
+                                                                       ListLayout="{Binding BindingContext.ListLayout, Source={x:Reference MainPage}}"/>
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate>
+                            </FlexLayout>
+                        </ScrollView>
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+                </CarouselView>
+            </StackLayout>
 
         </StackLayout>
 </ContentPage>

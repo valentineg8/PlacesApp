@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    x:Class="PlacesApp.Styles.LightTheme">
+    <Color x:Key="background">#FFF</Color>
+    <Color x:Key="mainBackground">#FFF</Color>
+    <Color x:Key="mainLabel">#111</Color>
+    <Color x:Key="secondaryLabel">#666</Color>
+    <Color x:Key="entryBackground">#EEE</Color>
+    <Color x:Key="radioBackground">#999</Color>
+    <Color x:Key="borderColor">#DDD</Color>
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Styles/Global.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+ 
+</ResourceDictionary>

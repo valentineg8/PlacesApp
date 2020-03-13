@@ -15,11 +15,11 @@ namespace PlacesApp.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            detailContainer.FadeTo(1, 250, Easing.SinInOut);
-            detailContainer.TranslateTo(0, 0, 250, Easing.SinInOut);
+            detailContainer.FadeTo(1, 200, Easing.CubicInOut);
+            detailContainer.TranslateTo(0, 0, 200, Easing.CubicInOut);
 
-            descriptionContainer.FadeTo(1, 500, Easing.SinInOut);
-            descriptionContainer.TranslateTo(0, 0, 500, Easing.SinInOut);
+            descriptionContainer.FadeTo(1, 350, Easing.CubicInOut);
+            descriptionContainer.TranslateTo(0, 0, 350, Easing.CubicInOut);
         }
     }
 }

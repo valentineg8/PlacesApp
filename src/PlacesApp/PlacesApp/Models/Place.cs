@@ -18,4 +18,10 @@ namespace PlacesApp.Models
         public string Description { get; set; }
         public List<string> Images { get; set; }
     }
+
+    public enum ListLayoutOptions
+    {
+        Big,
+        Small
+    }
 }

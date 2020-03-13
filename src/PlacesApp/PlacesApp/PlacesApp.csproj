@@ -25,5 +25,7 @@
     <Folder Include="Models\" />
     <Folder Include="Controls\" />
     <Folder Include="Utils\" />
+    <Folder Include="Styles\" />
+    <Folder Include="Components\" />
   </ItemGroup>
 </Project>
